@@ -140,8 +140,8 @@
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right pt-0" aria-labelledby="dd-user-menu">
 
-                                    <h5 class="p-2 text-center nomInfo">Nombre y apellido del usuario</h5>
-                                    <a class="dropdown-item" href=""><span
+                                    <h5 class="p-2 text-center nomInfo">{{Auth::user()->nombre ." ". Auth::user()->apellido  }}</h5>
+                                    <a class="dropdown-item" href="{{route("usuario.perfil")}}"><span
                                             class="font-icon glyphicon glyphicon-user"></span>Perfil</a>
                                     <a class="dropdown-item" href=""><span
                                             class="font-icon glyphicon glyphicon-lock"></span>Cambiar contraseña</a>

@@ -36,6 +36,27 @@ class AppServiceProvider extends ServiceProvider
 
         $total_producto=DB::select(" select count(*)as total  from producto where estado=1 ");
         view::share("total_producto", $total_producto[0]->total);
+
+        $venta = DB::select("
+        SELECT
+        sum(venta.pagoTotal) as 'tot',
+        MONTHNAME(venta.fecha) as 'fecha',
+        MONTH(venta.fecha) as 'fechaN',
+        venta.total,
+        venta.id_venta
+        FROM
+        venta
+        where
+        EXTRACT(YEAR FROM fecha) = EXTRACT(YEAR FROM NOW()) and venta.estado=1
+        GROUP BY MONTHNAME(venta.fecha)
+        ORDER BY Month(fecha)ASC
+         ");
+        $data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        foreach ($venta as $key => $value) {
+            $data[$value->fechaN - 1] = $value->tot;
+        }
+
+        View::share("ventas", $venta);
     }
     }
 

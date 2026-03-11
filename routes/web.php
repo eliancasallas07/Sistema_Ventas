@@ -33,19 +33,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 /* mis rutas */
-
+Route::get("mi_perfil", function(){
+    return view("vistas.perfil");
+})->name("usuario.perfil");
 
 
 //empresa
 Route::get('empresa-index',[EmpresaController::class,'index'])->name('empresa.index')->middleware('verified');
 Route::post('empresa-update-{id}',[EmpresaController::class,'update'])->name('empresa.update')->middleware('verified');
 
-//test db laravel
-Route::get('/test-db-laravel', function () {
-    try {
-        DB::connection()->getPdo();
-        return '¡Conexión Laravel exitosa!';
-    } catch (\Exception $e) {
-        return 'Error de conexión Laravel: ' . $e->getMessage();
-    }
-});
+
+
