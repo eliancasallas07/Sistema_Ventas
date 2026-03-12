@@ -5,6 +5,7 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\RecuperarClaveController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
@@ -33,14 +34,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 /* mis rutas */
-Route::get("mi_perfil", function(){
-    return view("vistas.perfil");
-})->name("usuario.perfil");
-
+Route::get("mi_perfil", [PerfilController::class, "index"] )->name("usuario.perfil");
+Route::post('/actualizar-foto-perfil', [PerfilController::class, 'actualizarIMG'])->name('perfil.actualizarIMG');
 
 //empresa
-Route::get('empresa-index',[EmpresaController::class,'index'])->name('empresa.index')->middleware('verified');
-Route::post('empresa-update-{id}',[EmpresaController::class,'update'])->name('empresa.update')->middleware('verified');
-
-
-
+Route::get('empresa-index', [EmpresaController::class, 'index'])->name('empresa.index')->middleware('verified');
+Route::post('empresa-update-{id}', [EmpresaController::class, 'update'])->name('empresa.update')->middleware('verified');
