@@ -38,29 +38,123 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
 - **[64 Robots](https://64robots.com)**
 - **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
 
-## Contributing
+# 🚀 Sistema de Ventas - Laravel MVC
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 📋 Descripción del Proyecto
 
-## Code of Conduct
+Sistema completo de gestión de ventas y usuarios desarrollado en Laravel (PHP), implementando el patrón MVC, Eloquent ORM y autenticación robusta. El proyecto incluye módulos para administración de usuarios, productos, ventas, reportes y perfil.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## ✨ Funcionalidades Implementadas
 
-## Security Vulnerabilities
+### 🔐 Sistema de Autenticación
+- ✅ Registro y login de usuarios con encriptación de contraseñas
+- ✅ Recuperación de contraseña vía email
+- ✅ Gestión de sesiones seguras
+- ✅ Validación de emails únicos
+- ✅ Roles y permisos (Admin, Usuario)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 🛠️ Sistema CRUD
+- ✅ CRUD de usuarios, productos y ventas
+- ✅ Búsqueda y filtrado en tiempo real
+- ✅ Actualización de datos de perfil y foto de perfil
+- ✅ Eliminación de registros con confirmación
+- ✅ Exportación de datos
 
-## License
+### 🏗️ Arquitectura Técnica
+- ✅ Patrón **Modelo-Vista-Controlador (MVC)**
+- ✅ **Laravel 10+** con Eloquent ORM
+- ✅ **Consultas preparadas** para prevenir inyección SQL
+- ✅ **Validación y sanitización** de datos
+- ✅ Respuestas **API RESTful**
+- ✅ **JavaScript moderno** para frontend dinámico
+- ✅ Diseño **responsive** con Bootstrap
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🔧 Stack Técnico
+
+| Tecnología | Versión | Propósito |
+|------------|---------|-----------|
+| PHP | 8+ | Backend con Laravel |
+| MySQL | 5.7+ | Base de datos |
+| JavaScript | ES6+ | Frontend dinámico |
+| HTML5/CSS3 | - | Interfaz de usuario |
+| Laravel | 10+ | Framework MVC |
+| Bootstrap | 4/5 | Diseño responsive |
+
+## 📁 Estructura del Proyecto
+
+```
+Sistema_Ventas/
+├── app/
+│   ├── Http/Controllers/         # Controladores
+│   ├── Models/                   # Modelos Eloquent
+│   ├── Mail/                     # Emails
+│   └── Providers/                # Servicios
+├── config/                      # Configuración
+├── database/                    # Migraciones y seeders
+├── public/                      # Archivos públicos (CSS, JS, imágenes)
+├── resources/views/             # Vistas Blade
+├── routes/                      # Rutas web y API
+├── storage/                     # Archivos y logs
+├── tests/                       # Pruebas unitarias y funcionales
+└── vendor/                      # Dependencias Composer
+```
+
+## 🔐 Seguridad Implementada
+
+- **Encriptación de contraseñas** con bcrypt
+- **Recuperación de contraseña** por email
+- **Consultas preparadas** para prevenir SQL injection
+- **Validación de datos** en backend y frontend
+- **Sesiones seguras**
+- **Roles y permisos**
+
+## 🚀 Funcionalidades por Implementar
+
+- [ ] Reportes avanzados de ventas
+- [ ] Dashboard con estadísticas
+- [ ] Integración de pagos
+- [ ] Notificaciones en tiempo real
+
+## 💻 Instalación y Configuración
+
+### Prerequisitos
+- XAMPP (Apache + MySQL + PHP)
+- Composer
+- Navegador web moderno
+- Git
+
+### Pasos de Instalación
+1. Clonar el repositorio en la carpeta `htdocs` de XAMPP
+2. Instalar dependencias con `composer install`
+3. Configurar `.env` para la conexión a la base de datos
+4. Ejecutar migraciones: `php artisan migrate`
+5. Iniciar Apache y MySQL desde XAMPP
+6. Acceder a `http://localhost/Sistema_Ventas/public/`
+
+## 🧪 Testing
+
+- ✅ Registro y login probados
+- ✅ CRUD de usuarios, productos y ventas operativo
+- ✅ Validaciones frontend y backend verificadas
+- ✅ Seguridad de contraseñas confirmada
+- ✅ Recuperación de contraseña funcional
+
+## 📝 Notas de Desarrollo
+
+Este proyecto forma parte de un portafolio profesional, desarrollado con:
+- Buenas prácticas de programación
+- Seguridad en aplicaciones web
+- Arquitectura escalable y mantenible
+- Experiencia de usuario profesional
+
+---
+
+**Desarrollado con ❤️ en Laravel y PHP**
+
+*Última actualización: Marzo 2026*
+
+---
+
+**¡Desarrollo principal finalizado!**
+El sistema de ventas y gestión de usuarios está completamente operativo y probado.
