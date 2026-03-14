@@ -154,7 +154,6 @@ Este proyecto forma parte de un portafolio profesional, desarrollado con:
 
 *Última actualización: Marzo 2026*
 
----
 
-**¡Desarrollo principal finalizado!**
-El sistema de ventas y gestión de usuarios está completamente operativo y probado.
+
+

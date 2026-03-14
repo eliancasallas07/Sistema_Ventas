@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\TryCatch;
 
 class PerfilController extends Controller
 {
@@ -18,29 +19,68 @@ class PerfilController extends Controller
     public function actualizarIMG(Request $request)
     {
         $request->validate([
-            "foto"=>"required|image|mimes:jpeg,png,jpg,gif,svg|max:2048"
+            "foto" => "required|image|mimes:jpeg,png,jpg,gif,svg|max:2048"
         ]);
 
-        $file=$request->file("foto");
-        $idUsuario=Auth::user()->id_usuario;
-        $nombreArchivo=$idUsuario."." . strtolower($file->getClientOriginalExtension());
-        $ruta=storage_path("app/public/FOTOS-PERFIL-USUARIO/".$nombreArchivo);
+        $file = $request->file("foto");
+        $idUsuario = Auth::user()->id_usuario;
+        $nombreArchivo = $idUsuario . "." . strtolower($file->getClientOriginalExtension());
+        $ruta = storage_path("app/public/FOTOS-PERFIL-USUARIO/" . $nombreArchivo);
 
-        $res=move_uploaded_file($file, $ruta);
+        $verificarFoto = DB::select("select foto from usuario where id_usuario = ?", [$idUsuario]);
+        $verificarFoto = $verificarFoto[0]->foto;
+        $nombreFotoAnterior = $verificarFoto;
 
-       try{
-        $actualizarFoto=DB::update("update usuario set foto='$nombreArchivo' where id_usuario=$idUsuario");
-        if($actualizarFoto==0) {
-            $actualizarFoto=1;
+        if ($verificarFoto = !null) {
+            $rutaFotoAnterior = storage_path("app/public/FOTOS-PERFIL-USUARIO/$nombreFotoAnterior");
+            try {
+                unlink($rutaFotoAnterior);
+            } catch (\Throwable $th) {
+            }
         }
-       }catch (\Throwable $th){
-        $actualizarFoto = 0;
-       }
+        $res = move_uploaded_file($file, $ruta);
 
-        if ($res and $actualizarFoto){
+        try {
+            $actualizarFoto = DB::update("update usuario set foto='$nombreArchivo' where id_usuario=$idUsuario");
+            if ($actualizarFoto == 0) {
+                $actualizarFoto = 1;
+            }
+        } catch (\Throwable $th) {
+            $actualizarFoto = 0;
+        }
+
+        if ($res and $actualizarFoto) {
             return back()->with("mensaje", "imagen actualizada corrrectamente");
-        }else{
+        } else {
             return back()->with("error", "error al actualizar la imagen");
+        }
+    }
+
+    public function eliminarFotoPerfil()
+    {
+        $idUsuario = Auth::user()->id_usuario;
+        // Validar que el usuario exista y tenga foto
+        $verificarFoto = DB::select("select foto from usuario where id_usuario = ?", [$idUsuario]);
+        if (!$verificarFoto || !isset($verificarFoto[0]->foto)) {
+            return back()->with("error", "Usuario no encontrado o sin foto de perfil.");
+        }
+        $nombreFoto = $verificarFoto[0]->foto;
+
+        if (empty($nombreFoto) || is_null($nombreFoto) || $nombreFoto === "null") {
+            return back()->with("error", "No tienes foto de perfil para eliminar.");
+        }
+
+        $rutaFoto = storage_path("app/public/FOTOS-PERFIL-USUARIO/$nombreFoto");
+        if (!file_exists($rutaFoto)) {
+            return back()->with("error", "La foto no existe en el servidor.");
+        }
+
+        try {
+            unlink($rutaFoto);
+            DB::update("update usuario set foto = null where id_usuario = ?", [$idUsuario]);
+            return back()->with("mensaje", "Foto de perfil eliminada correctamente");
+        } catch (\Throwable $e) {
+            return back()->with("error", "Error al eliminar la foto: " . $e->getMessage());
         }
     }
 }

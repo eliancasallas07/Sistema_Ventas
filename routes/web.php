@@ -1,3 +1,4 @@
+
 <?php
 
 use App\Http\Controllers\CitaController;
@@ -35,7 +36,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 /* mis rutas */
 Route::get("mi_perfil", [PerfilController::class, "index"] )->name("usuario.perfil");
-Route::post('/actualizar-foto-perfil', [PerfilController::class, 'actualizarIMG'])->name('perfil.actualizarIMG');
+Route::post('actualizar-foto-perfil', [PerfilController::class, 'actualizarIMG'])->name('perfil.actualizarIMG');
+Route::post('eliminar-foto-perfil', [PerfilController::class, "eliminarFotoPerfil"])->name("perfil.eliminarFoto");
 
 //empresa
 Route::get('empresa-index', [EmpresaController::class, 'index'])->name('empresa.index')->middleware('verified');
